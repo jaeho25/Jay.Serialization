@@ -8,7 +8,7 @@ Each serializable type can implement
 to fully control how its data is stored and restored.
 
 This follows an *ISerializable-style custom serialization pattern*, enabling precise control over complex object graphs, shared references, and state reconstruction.
-
+```c#
 var fruits = new Category() { Name = "Fruits" };
 var coffee = new Category() { Name = "Coffee" };
 
@@ -51,3 +51,4 @@ Console.WriteLine(store2.Products[0].Category == store2.Products[1].Category);
 // Coffee, Americano
 // Coffee, Moca
 // True
+```
