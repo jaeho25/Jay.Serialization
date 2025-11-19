@@ -5,12 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<VersionPrefix>1.0.1</VersionPrefix>
+	<Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-	<None Include="docs\readme.md" Pack="true" PackagePath="\"/>
+	<None Include="docs\readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
