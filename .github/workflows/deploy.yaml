@@ -25,8 +25,12 @@ jobs:
           echo "Building .NET project"
           dotnet build -c Release "./${{ env.PROJECT_PATH }}/${{ env.PROJECT_NAME }}.csproj"
 
+      - name: Pack
+        run: |
+          echo "Pack"
+          dotnet pack -c Release "./${{ env.PROJECT_PATH }}/${{ env.PROJECT_NAME }}.csproj" --output ./nupkg
+          
       - name: Publish to NuGet
         run: |
-          echo "Publishing to NuGet"
-          dotnet pack -c Release "./${{ env.PROJECT_PATH }}/${{ env.PROJECT_NAME }}.csproj"
-          dotnet nuget push ./${{ env.PROJECT_PATH }}/bin/Release/${{ env.PROJECT_NAME }}.*.nupkg --source https://api.nuget.org/v3/index.json --api-key $NUGET_TOKEN
+          echo "Publishing to NuGet"          
+          dotnet nuget push "./nupkg/${{ env.PROJECT_NAME }}.*.nupkg" --source https://api.nuget.org/v3/index.json --api-key $NUGET_TOKEN
