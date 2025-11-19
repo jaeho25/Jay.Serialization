@@ -6,11 +6,23 @@
     <Nullable>enable</Nullable>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<Version>1.0.1</Version>
+	<Authors>Jay</Authors>
+	<Company>Jay</Company>
+	<Description>Custom JSON serialization library supporting object reference preservation and circular references.</Description>
   </PropertyGroup>
 
+	<ItemGroup>
+		<Content Include="README.md">
+			<Pack>true</Pack>
+			<!-- Add in NuGet -->
+			<PackagePath></PackagePath>
+			<!-- at root -->
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-	<None Include="docs\readme.md" Pack="true" PackagePath="\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />	
   </ItemGroup>
 
 </Project>
