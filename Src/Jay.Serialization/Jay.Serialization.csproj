@@ -5,7 +5,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<Version>1.0.1</Version>
+	<Version>1.0.2</Version>
 	<Authors>Jay</Authors>
 	<Company>Jay</Company>
 	<Description>Custom JSON serialization library supporting object reference preservation and circular references.</Description>
