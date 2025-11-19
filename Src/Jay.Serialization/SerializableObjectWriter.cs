@@ -9,7 +9,7 @@ namespace Jay.Serialization
 {
     internal class SerializableObjectWriter : JsonConverter
     {
-        private readonly Dictionary<object, string> _objectToId = new(ReferenceEqualityComparer.Instance);
+        private readonly Dictionary<object, string> _objectToId = new Dictionary<object, string>();
         private int _nextId = 1;
 
         public override bool CanWrite => true;
@@ -28,12 +28,12 @@ namespace Jay.Serialization
                 return;
             }
 
-            if (value is not ISerializableObject)
+            if (!(value is ISerializableObject))
             {
                 throw new ArgumentException("It has to be ISerializableObject", nameof(value));
             }
 
-            // 이미 직렬화된 객체면 $ref
+            // already done, $ref
             if (_objectToId.TryGetValue(value, out var existingId))
             {
                 writer.WriteStartObject();
@@ -43,7 +43,7 @@ namespace Jay.Serialization
                 return;
             }
 
-            // 새 객체 등록
+            // register new object
             string newId = "_" + (_nextId++).ToString();
             _objectToId[value] = newId;
 
@@ -56,7 +56,7 @@ namespace Jay.Serialization
 
             writer.WritePropertyName("$type");
 
-            //버전 정보 없이 저장
+            // with no versioning
             //writer.WriteValue(type.AssemblyQualifiedName);
             writer.WriteValue(Serializer.GetTypeName(type));
 

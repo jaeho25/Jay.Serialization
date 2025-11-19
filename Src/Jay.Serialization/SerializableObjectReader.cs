@@ -13,12 +13,12 @@ namespace Jay.Serialization
 {
     internal class SerializableObjectReader : JsonConverter
     {
-        private readonly Dictionary<string, object> _idToObject = new();
+        private readonly Dictionary<string, object> _idToObject = new Dictionary<string, object>();
 
-        private readonly List<(object Obj, string MemberName, string RefId)> _waitingRefIds = new();
-        private readonly List<(IList List, string RefId)> _waitingRefIdsForList = new();
+        private readonly List<(object Obj, string MemberName, string RefId)> _waitingRefIds = new List<(object Obj, string MemberName, string RefId)>();
+        private readonly List<(IList List, string RefId)> _waitingRefIdsForList = new List<(IList List, string RefId)>();
 
-        private readonly List<(ISerializableObject Object, SerializableObjectInfo Info)> _objectInfos = new();
+        private readonly List<(ISerializableObject Object, SerializableObjectInfo Info)> _objectInfos = new List<(ISerializableObject Object, SerializableObjectInfo Info)>();
 
 
         public override bool CanWrite => false;
@@ -184,7 +184,7 @@ namespace Jay.Serialization
                 _idToObject[id] = obj;
 
                 var valuesObj = new SerializableObjectInfo();
-                List<(string MemberName, string RefId)> notReadyInfos = new();
+                List<(string MemberName, string RefId)> notReadyInfos = new List<(string MemberName, string RefId)>();
 
                 foreach (var kv in jo.Children<JProperty>())
                 {

@@ -43,71 +43,71 @@ namespace TestConsole
         }
     }
 
-    internal class Store : ISerializableObject
+internal class Store : ISerializableObject
+{
+    public List<Category> Categories { get; set; } = new List<Category>();
+    public List<Product> Products { get; set; } = new List<Product>();
+
+    //requires empty constructor
+    public Store()
     {
-        public List<Category> Categories { get; set; } = new List<Category>();
-        public List<Product> Products { get; set; } = new List<Product>();
-
-        //requires empty constructor
-        public Store()
-        {
             
-        }
-
-        public void GetObjectData(SerializableObjectInfo info)
-        {
-            info.AddValue(nameof(Categories), Categories);
-            info.AddValue(nameof(Products), Products);
-        }
-        public void SetObjectData(SerializableObjectInfo info)
-        {
-            Categories = info.GetValue<List<Category>>(nameof(Categories))!;
-            Products = info.GetValue<List<Product>>(nameof(Products))!;
-        }
     }
 
-    internal class Category : ISerializableObject
+    public void GetObjectData(SerializableObjectInfo info)
     {
-        public string Name { get; set; } = null!;
+        info.AddValue(nameof(Categories), Categories);
+        info.AddValue(nameof(Products), Products);
+    }
+    public void SetObjectData(SerializableObjectInfo info)
+    {
+        Categories = info.GetValue<List<Category>>(nameof(Categories))!;
+        Products = info.GetValue<List<Product>>(nameof(Products))!;
+    }
+}
 
-        //requires empty constructor
-        public Category()
-        {
+internal class Category : ISerializableObject
+{
+    public string Name { get; set; } = null!;
+
+    //requires empty constructor
+    public Category()
+    {
             
-        }
-
-        public void GetObjectData(SerializableObjectInfo info)
-        {
-            info.AddValue(nameof(Name), Name);
-        }
-
-        public void SetObjectData(SerializableObjectInfo info)
-        {
-            Name = info.GetValue<string>(nameof(Name))!;
-        }
     }
 
-    internal class Product : ISerializableObject
+    public void GetObjectData(SerializableObjectInfo info)
     {
-        public string Name { get; set; } = null!;
-
-        public Category Category { get; set; } = null!;
-
-        //requires empty constructor
-        public Product()
-        {
-            
-        }
-        public void GetObjectData(SerializableObjectInfo info)
-        {
-            info.AddValue(nameof(Name), Name);
-            info.AddValue(nameof(Category), Category);
-        }
-
-        public void SetObjectData(SerializableObjectInfo info)
-        {
-            Name = info.GetValue<string>(nameof(Name))!;
-            Category = info.GetValue<Category>(nameof(Category))!;
-        }
+        info.AddValue(nameof(Name), Name);
     }
+
+    public void SetObjectData(SerializableObjectInfo info)
+    {
+        Name = info.GetValue<string>(nameof(Name))!;
+    }
+}
+
+internal class Product : ISerializableObject
+{
+    public string Name { get; set; } = null!;
+
+    public Category Category { get; set; } = null!;
+
+    //requires empty constructor
+    public Product()
+    {
+            
+    }
+    public void GetObjectData(SerializableObjectInfo info)
+    {
+        info.AddValue(nameof(Name), Name);
+        info.AddValue(nameof(Category), Category);
+    }
+
+    public void SetObjectData(SerializableObjectInfo info)
+    {
+        Name = info.GetValue<string>(nameof(Name))!;
+        Category = info.GetValue<Category>(nameof(Category))!;
+    }
+}
 }

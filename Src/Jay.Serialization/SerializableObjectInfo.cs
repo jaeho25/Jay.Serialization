@@ -9,13 +9,26 @@ namespace Jay.Serialization
 {
     public class SerializableObjectInfo
     {
-        private readonly Dictionary<string, object?> _values = new();
+        private readonly Dictionary<string, object?> _values = new Dictionary<string, object?>();
 
         public IReadOnlyDictionary<string, object?> Values => _values;
 
-        public T? GetValue<T>(string name)
+#if NETSTANDARD2_1       
+
+#else
+        //public T? GetValue<T>(string name)
+        //{
+        //    if (!_values.TryGetValue(name, out var obj)) return default;
+
+        //    if (obj is T t) return t;
+
+        //    return (T)Convert.ChangeType(obj, typeof(T))!;
+        //}
+#endif
+
+        public T GetValue<T>(string name)
         {
-            if (!_values.TryGetValue(name, out var obj)) return default;
+            if (!_values.TryGetValue(name, out var obj)) return default!;
 
             if (obj is T t) return t;
 
